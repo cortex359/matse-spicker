@@ -4,12 +4,12 @@
 \begin{defi}{Stellenwertsystem}
     Allgemein lässt sich der Wert einer Zahl in einem Stellenwertsystem zur Basis $B$ wie folgt ausdrücken ($d_i$ ist der Wert der $i$-ten Stelle, $r$ der Exponent der höchtswertigen Stelle):
     $$
-        n_b = \sum^r_{i=0} B^i \cdot d_i
+        (n)_{B} = \sum^r_{i=0} B^i \cdot d_i
     $$
 \end{defi}
 
 \begin{algo}{Dezimal $\to$ Binär, Hexadezimal, $\ldots$}
-    Sei $B = 2$ für Umrechnung ins Binärsystem, bzw. $B =16$ für das Hexadezimalsystem.
+    Sei $B = 2$ für Umrechnung ins Binärsystem, bzw. $B = 16$ für das Hexadezimalsystem.
 
     Es gilt für eine umzurechnende Zahl $z$:
 
@@ -24,7 +24,7 @@
         \end{aligned}
     $$
 
-    Damit gilt dann: $(z)_{10} = (r_nr_{n-1}\ldots r_2r_1r_0)_B$ (also gelesen von \emph{unten nach oben}).\qed
+    Damit gilt dann: $(z)_{10} = (r_nr_{n-1}\ldots r_2r_1r_0)_B$ (Restspalte von \emph{unten nach oben} gelesen).\qed
 \end{algo}
 
 \begin{algo}{Binär $\to$ Hexadezimal}
@@ -47,7 +47,7 @@
 
     Das erste Bit gibt dabei das Vorzeichen an.
 
-    Nachteile: Doppelte Darstellung der Null, Subtraktion lässt sich nicht auf Addition mit einer negativen Zahl zurückführen
+    Nachteile: Doppelte Darstellung der Null, Subtraktion lässt sich nicht auf Addition mit einer negativen Zahl zurückführen.
 \end{defi}
 
 \begin{defi}{Zweierkomplement}
