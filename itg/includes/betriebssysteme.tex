@@ -139,6 +139,13 @@
     Wieviele FIFO-Queues es gibt, ist vom konkreten Einsatzszenario abhängig.
 \end{algo}
 
+\begin{bonus}{Mittlere Verweildauer}
+	Scheduling Strategien lassen sich im konkreten Anwendungsfall anhand der \emph{mittleren Verweildauer} der Prozesse in der Job-Queue vergleichen. Ordnet man eine Liste mit $n$ Prozessen und ihren Bearbeitungszeiten $t_1, \ldots , t_n$ entsprechend der gewählten Scheduling Strategie an, so terminieren diese zu den Zeitpunkten $T_1 = t_1, T_2 = T_1 + t_2, \ldots , T_n = T_{n-1} + t_n$. Dabei sind $T_1, \ldots , T_n$ die Verweildauern der Prozesse. Die mittlere Verweildauer ist also:
+	$$
+		\frac{T_1 + T_2 + \ldots + T_n}{n}
+	$$
+\end{bonus}
+
 \subsection{Speicherverwaltung}
 
 \begin{defi}{Reale Speicherverwaltung}
