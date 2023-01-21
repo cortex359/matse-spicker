@@ -1,12 +1,9 @@
 \documentclass[german]{spicker}
 
-\usepackage{amsmath}
-
-\usepackage{graphicx}
-\usepackage{tabularx, multirow}
+\addbibresource{itg.bib}
 
 \title{IT-Grundlagen}
-\author{Patrick Gustav Blaneck}
+\author{Patrick Gustav Blaneck, Christian Rene Thelen}
 \makeindex[intoc]
 \makeindex[intoc, name=Beispiele,title=Beispiele]
 
@@ -14,7 +11,7 @@
 
 \begin{document}
 \maketitle
-In dieser Zusammenfassung werden Inhalte aus dem ITG-Skript von Bastian Küppers verwendet.
+In dieser Zusammenfassung werden Inhalte aus dem ITG-Skript von Bastian Küppers \cite{Küppers2022} verwendet.
 \tableofcontents
 \newpage
 
@@ -25,6 +22,10 @@ In dieser Zusammenfassung werden Inhalte aus dem ITG-Skript von Bastian Küppers
 \include{includes/virtualisierung.tex}
 \include{includes/datenschutz.tex}
 
+
 \printindex
 \printindex[Beispiele]
+
+\printbibliography
+
 \end{document}
