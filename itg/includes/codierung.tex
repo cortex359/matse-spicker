@@ -43,19 +43,19 @@
 \subsection{Zahlendarstellungen}
 
 \begin{defi}{Einerkomplement}
-    Das \emph{Einerkomplement} einer Binärzahl wird gebildet, indem man alle Bits negiert.
+    Das \emph{Einerkomplement} einer Binärzahl mit fester Länge (falls notwendig mit führenden Nullen auffüllen) wird gebildet, indem man alle Bits negiert.
 
-    Das erste Bit gibt dabei das Vorzeichen an.
+    Das erste Bit zeigt das Vorzeichen an.
 
     Nachteile: Doppelte Darstellung der Null, Subtraktion lässt sich nicht auf Addition mit einer negativen Zahl zurückführen.
 \end{defi}
 
 \begin{defi}{Zweierkomplement}
-    Das \emph{Zweierkomplement} einer Binärzahl wird gebildet, indem man das Einerkomplement bildet und zusätzlich $1$ addiert.
+    Das \emph{Zweierkomplement} einer Binärzahl wird gebildet, indem man das Einerkomplement bildet und zusätzlich $1$ addiert. Ein Überlauf wird dabei ignoriert.
 
-    Das erste Bit gibt dabei das Vorzeichen an.
+    Das erste Bit zeigt das Vorzeichen an.
 
-    Vorteile: Subtraktion entspricht Addition mit einer negativen Zahl, keine doppelte Null
+    Vorteile: Subtraktion entspricht Addition mit einer negativen Zahl, keine doppelte Null.
 \end{defi}
 
 \begin{defi}{Binäre Festkommazahlen}
