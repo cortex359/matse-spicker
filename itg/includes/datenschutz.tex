@@ -1,0 +1,197 @@
+
+\section{Datenschutz und Sicherheit}
+\subsection{Datensicherheit}
+
+\begin{defi}{Kryptographie}
+    Kryptographie ist die Wissenschaft der Verschlüsselung von Informationen. Sie wird genutzt
+    um Informationen auf eine Art und Weise zu verändern, sodass ein Unbefugter
+    die Informationen nicht mehr lesen kann. Es soll nur dem tatsächlichen Adressaten
+    einer Nachricht möglich sein, diese auch zu lesen. Es geht also explizit nicht darum,
+    den Diebstahl von Informationen zu verhindern, sondern es geht darum, dass
+    entwendete Informationen nicht gelesen werden können.
+\end{defi}
+
+\begin{defi}{Transpositionschiffren}
+    Die Verschlüsselung wird durch Umordnung der Zeichen
+    im Klartext umgesetzt.
+\end{defi}
+
+\begin{defi}{Substitutionschiffren}
+    Die Verschlüsselung wird durch Ersetzung der Zeichen
+    im Klartext realisiert.
+
+    \textbf{Monoalphabetische Substitution}:
+    \begin{itemize}
+        \item Jedes Zeichen des Klartexts wird durch genau
+              ein eindeutiges Zeichen aus dem Geheimtextalphabet ersetzt, das für einen
+              gewählten Schlüssel immer gleich ist.
+    \end{itemize}
+
+    \textbf{Homophone Substitution}:
+    \begin{itemize}
+        \item Jedes Zeichen des Klartexts wird durch genau ein
+              anderes Zeichen aus einer eindeutigen Menge von Zeichen ersetzt, die für einen
+              gewählten Schlüssel immer gleich ist.
+    \end{itemize}
+
+    \textbf{Polyalphabetische Substitution}:
+    \begin{itemize}
+        \item Jedes Zeichen wird durch ein eindeutiges Zeichen
+              aus einem von mehreren geheimen Alphabeten ersetzt, die für einen gewählten
+              Schlüssel immer gleich sind. Die Alphabete werden dabei immer der Reihe nach
+              verwendet.
+    \end{itemize}
+\end{defi}
+
+\begin{example}{Cäsar Chiffre}
+    Im einfachsten Fall beinhalten $\mathfrak{P}$ und $\mathfrak{S}$ dieselben Zeichen und sind nur gegeneinander
+    um $k$ Zeichen verschoben. Diese Variante einer \emph{monoalphabetischen Substitutionschiffre} wird \emph{Cäsar Chiffre} genannt.
+
+    Alice wählt für die Verschlüsselung $k = 10$ und erhält damit die folgenden Alphabete:
+
+    \begin{center}
+        $\mathfrak{P}$: \texttt{A B C D E F G H I J K L M N O P Q R S T U V W X Y Z}\\
+        $\mathfrak{S}$: \texttt{J K L M N O P Q R S T U V W X Y Z A B C D E F G H I}\\
+    \end{center}
+
+    Da Alice $k = 10$ gewählt hat, beginnt das Geheimtextalphabet mit \texttt{J}, dem
+    zehnten Buchstaben des Alphabets. Die Verschlüsselung führt Alice durch,
+    indem sie jeden Buchstaben ihres Klartexts durch den entsprechenden Buchstaben
+    aus dem Geheimtextalphabet ersetzt.Werden die beiden Alphabete wie
+    weiter oben aufgeschrieben, ist das einfach der Buchstabe im Geheimtextalphabet
+    der direkt unter dem Buchstaben im Klartextalphabet steht. Damit ergibt
+    sich für die Nachricht \texttt{HALLO} der Geheimtext \texttt{QJUUX}. Bob kann den
+    Geheimtext dann entschlüsseln, indem er wiederum beide Alphabete untereinander
+    schreibt und jedem Buchstaben aus dem Geheimtext den zugehörigen
+    Buchstaben aus dem Klartextalphabet zuorndet, der dann genau darüber steht.
+\end{example}
+
+\begin{example}{Vigenère Chiffre}
+    Eine bekannte \emph{polyalphabetische Substitutionschiffre} ist die \emph{Vigenère Chiffre}.
+    Sie funktioniert im Prinzip wie die Cäsar-Chiffre, verwendet also verschobene
+    lateinische Alphabete zur Verschlüsselung. Wie viele Alphabete und wie
+    jedes von ihnen verschoben, wird durch den Schlüssel $k$ bestimmt, der in diesem
+    Fall ein Wort ist. Es gibt also soviele geheime Alphabete, wie es Zeichen
+    in $k$ gibt und jedes dieser Alphabete ist verschoben, so dass das $i$-te Alphabet
+    mit dem $i$-ten Zeichen von $k$ beginnt.
+    Alice wählt das Schlüsselwort $k = EDV$. Damit ergeben sich Klartext- und
+    Geheimalphabete wie folgt:
+
+    \begin{center}
+        $\mathfrak{P}$: \texttt{A B C D E F G H I J K L M N O P Q R S T U V W X Y Z}\\
+        $\mathfrak{S}_1$: \texttt{E F G H I J K L M N O P Q R S T U V W X Y Z A B C D}\\
+        $\mathfrak{S}_2$: \texttt{D E F G H I J K L M N O P Q R S T U V W X Y Z A B C}\\
+        $\mathfrak{S}_3$: \texttt{V W X Y Z A B C D E F G H I J K L M N O P Q R S T U}\\
+    \end{center}
+
+    Damit kann Alice den Klartext $M =$ \texttt{HALLOHALLO} verschlüsseln, indem Sie
+    die Buchstaben des Klartexts wie bei der Cäsar Chiffre zuordnet und dabei die
+    drei Geheimtextalphabete reihum verwendet. Da der Klartext mehr Zeichen
+    enthält, als es Geheimtextalphabete gibt, fängt sie nach jeweils drei Zeichen
+    wieder beim ersten Geheimtextalphabet an. Somit ergibt sich der Geheimtext
+    $C =$ \texttt{LDGPRCEOGS}.
+\end{example}
+
+\begin{defi}{Moderne Verschlüsselungsverfahren}
+    Moderne Verschlüsselungsverfahren werden, im Gegensatz zu klassischen Verfahren,
+    nicht mehr auf Zeichen einer natürlichen Sprache angewandt. Stattdessen werden
+    Zahlen bzw. Bits als Grundlage der Operationen verwendet. Damit können
+    beliebige Daten verschlüsselt werden, nicht mehr nur Text. Damit sind moderne
+    Verschlüsselungsverfahren den Anforderungen der heutigen digitalen Gesellschaft
+    gewachsen.
+
+    \textbf{Symmetrische Verfahren}:
+    \begin{itemize}
+        \item denselben Schlüssel zur Ver- und Entschlüsselung
+        \item Problem des Schlüsselaustauschs
+        \item Vertraulichkeit, aber keine zur Sicherstellung von Authentifizierung und Integrität
+        \item[$\to$] Blockchiffren
+            \subitem -  zu verschlüsselnde Daten in $m$ Blöcke derselben Größe aufgeteilt
+            \subitem -  einfachster Fall: jeder der zuvor erzeugten Blöcke $m_i$ mit Schlüssel $k$
+            \subitem zu verschlüsseltem Block $c_i$ derselben Größe übersetzt
+        \item[$\to$] Stromchiffren
+            \subitem -  Klartext wird bitweise anhand eines Schlüsselstroms verschlüsselt
+            \subitem - Schlüsselstrom und Geheimtext haben dieselbe Länge wie der Klartext
+    \end{itemize}
+
+    \textbf{Asymmetrische Verfahren}:
+    \begin{itemize}
+        \item Die meisten asymmetrischen Verfahren basieren auf mathematischen Problemen, die nicht effizient zu lösen sind.
+        \item
+    \end{itemize}
+\end{defi}
+
+\begin{algo}{RSA Verschlüsselung}
+    RSA basiert auf der Faktorisierung ganzes Zahlen, für die es keinen bekannten
+    effizienten Algorithmus gibt. Dabei geht es darum, eine Zahl in ihre Primfaktoren
+    zu zerlegen.
+
+    Da beide Schlüssel des Schlüsselpaars zusammen funktionieren sollen, müssen sie
+    nach einer festen Vorschrift erzeugt werden:
+    \begin{enumerate}
+        \item Wähle zwei Primzahlen $p, q$ mit $p \neq q$
+        \item Berechne $N = p \cdot q$
+        \item Berechne $\varphi(N) = (p-1)\cdot (q-1)$
+        \item Wähle ein $e$, das teilerfremd zu $\varphi(N)$ ist mit $1 < e < \varphi(N)$
+        \item Berechne $d$, sodass $e \cdot d \equiv 1 \mod \varphi(N)$
+    \end{enumerate}
+
+    Nach dieser Prozedur ist $(e,N)$ der \emph{public key} und $(d,N)$ der \emph{private Key}. Damit
+    kann nun jeder Nachricht $M \in \N, 1 < M < N$ anhand folgender Formel verschlüsselt
+    werden:
+    $$
+        C = M^e \mod N
+    $$
+
+    Die Entschlüsselung der verschlüsselten Nachricht $C$ kann dann anhand einer ähnlichen Formel durchgeführt werden:
+    $$
+        M = C^d \mod N
+    $$
+\end{algo}
+
+\begin{example}{RSA Verschlüsselung}
+    Damit Alice Bob eine Nachricht schreiben kann, muss Bob zunächst seinen \emph{public Key} zur Vefügung stellen.
+
+    Zur Erzeugung seines Schlüsselpaars wählt Bob die Primzahlen $p=13$ und $q=17$.
+    Damit ergibt sich $N = 221$ und $\varphi(N) = 192$.
+    Anschließend wählt Bob $e=5$ und berechnet damit $d=77$.
+    Damit kann Bob $(5, 221)$ als seinen \emph{public Key} an Alice geben und $(77, 221)$ behält er als \emph{private Key} für sich.
+
+    Alice hat nun Bobs \emph{public Key} und möchte damit die Nachricht $M = 42$ verschlüsseln.
+    Dazu berechnet Sie $C = 42^5 \mod 221 = 9$ und schickt die verschlüsselte Nachricht anschließend an Bob.
+
+    Bob kann nun mit seinem \emph{private Key} die erhaltene Nachricht entschlüsseln und erhält $M = 9^77 \mod 221 = 42$.
+\end{example}
+
+\begin{defi}{Digitale Signatur}
+    Um auch \emph{Authentifizierung}
+    und \emph{Integritat} herstellen zu können, muss eine digitale Signatur verwendet
+    werden. Dazu braucht es zunachst eine \emph{Hashfunktion}, die eine Art Fingerabdruck
+    der Nachricht erzeugt.
+
+    Nachdem mit der Hashfunktion der Hashwert der Nachricht berechnet wurde, wird
+    dieser mit dem \emph{private Key} des Senders verschlüsselt.
+
+    Danach berechnet
+    der Empfänger selbst den Hashwert der empfangen Nachricht. Stimmen der
+    selbst berechnete Hashwert und der entschlüsselte Hashwert überein ist die \emph{Integrität} der Nachricht sichergestellt. Da zudem das Entschlüsseln des Hashwertes mit
+    dem öffentlichen Schlüssel des Senders funktioniert hat, ist der Sender authentifiziert,
+    da dessen privater Schlüssel zur Erstellung der digitalen Signatur verwendet
+    wurde.
+
+    Es ist also notwendig, dass sich Sender und Empfanger vorab auf eine
+    Hashfunktion einigen. Zusatzlich ist wichtig zu beachten, dass eine Digitale Signatur
+    \emph{keine Vertraulichkeit} herstellt, dazu muss die Nachricht zusatzlich verschlüsselt
+    werden.
+\end{defi}
+
+\begin{defi}{Hybride Chiffren}
+    Die Kombination von symmetrischen und asymmetrischen
+    Chiffren nennt man \emph{hybride Chiffren}.
+
+    \begin{itemize}
+        \item verhältnismäßig kurzer Schlüssel einer Blockchiffre wird asymmetrisch verschlüsselt und zum Empfänger einer Nachricht transportiert
+        \item Kommunikation selbst läuft symmetrisch verschlüsselt ab
+        \item Kombination erzielt guten Kompromiss zwischen Sicherheit und Rechenaufwand
+    \end{itemize}
+\end{defi}

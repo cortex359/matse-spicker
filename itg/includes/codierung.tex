@@ -1,0 +1,184 @@
+\section{Codierung}
+\subsection{Stellenwertsysteme}
+
+\begin{defi}{Stellenwertsystem}
+    Allgemein lässt sich der Wert einer Zahl in einem Stellenwertsystem zur Basis $B$ wie folgt ausdrücken ($d_i$ ist der Wert der $i$-ten Stelle, $r$ der Exponent der höchtswertigen Stelle):
+    $$
+        n_b = \sum^r_{i=0} B^i \cdot d_i
+    $$
+\end{defi}
+
+\begin{algo}{Dezimal $\to$ Binär, Hexadezimal, $\ldots$}
+    Sei $B = 2$ für Umrechnung ins Binärsystem, bzw. $B =16$ für das Hexadezimalsystem.
+
+    Es gilt für eine umzurechnende Zahl $z$:
+
+    $$
+        \begin{aligned}
+            z : B       & = z_0 \quad     &  & \text{Rest } r_0     \\
+            z_0 : B     & = z_1 \quad     &  & \text{Rest } r_1     \\
+            z_1 : B     & = z_2 \quad     &  & \text{Rest } r_2     \\
+                        & \ldots          &  &                      \\
+            z_{n-2} : B & = z_{n-1} \quad &  & \text{Rest } r_{n-1} \\
+            z_{n-1} : B & = 0 \quad       &  & \text{Rest } r_n
+        \end{aligned}
+    $$
+
+    Damit gilt dann: $(z)_{10} = (r_nr_{n-1}\ldots r_2r_1r_0)_B$ (also gelesen von \emph{unten nach oben}).\qed
+\end{algo}
+
+\begin{algo}{Binär $\to$ Hexadezimal}
+    Sei eine Binärzahl $b$ gegeben mit $n \in 4\N$ Bits.
+
+    Dann kann $b$ wie folgt in eine Hexadezimalzahl $h$ mit $m = \frac{n}{4}$ Zeichen umgeformt werden:
+
+    $$
+        \underbrace{b_{n-1}b_{n-2}b_{n-3}b_{n-4}}_{h_{m-1}} ~ \ldots ~ \underbrace{b_7b_6b_5b_4}_{h_1} ~ \underbrace{b_3b_2b_1b_0}_{h_0}
+    $$
+
+    Erinnerung: 4 Bits können binär nur 16 mögliche Werte annehmen!
+\end{algo}
+
+\newpage
+\subsection{Zahlendarstellungen}
+
+\begin{defi}{Einerkomplement}
+    Das \emph{Einerkomplement} einer Binärzahl wird gebildet, indem man alle Bits negiert.
+
+    Das erste Bit gibt dabei das Vorzeichen an.
+
+    Nachteile: Doppelte Darstellung der Null, Subtraktion lässt sich nicht auf Addition mit einer negativen Zahl zurückführen
+\end{defi}
+
+\begin{defi}{Zweierkomplement}
+    Das \emph{Zweierkomplement} einer Binärzahl wird gebildet, indem man das Einerkomplement bildet und zusätzlich $1$ addiert.
+
+    Das erste Bit gibt dabei das Vorzeichen an.
+
+    Vorteile: Subtraktion entspricht Addition mit einer negativen Zahl, keine doppelte Null
+\end{defi}
+
+\begin{defi}{Binäre Festkommazahlen}
+    Die Umwandlung des ganzzahligen Anteils einer (dezimalen) Festkommazahl erfolgt analog zu ganzen Zahlen.
+
+    Zusätzlich werden aber die Nachkommastellen mit entsprechend negativen Exponenten weiter \glqq verrechnet\grqq.
+\end{defi}
+
+\begin{defi}{Gleitkommazahlen nach \emph{IEEE 754}}
+    Die Darstellung einer Gleitkommazahl
+    $$
+        x = s \cdot m \cdot b^e
+    $$
+    besteht aus
+    \begin{itemize}
+        \item Vorzeichen $s$ (1 Bit)
+        \item Mantisse $m$ ($p$ Bits, $p_{\text{float}} = 23$, $p_{\text{double}} = 52$)
+        \item Basis $b$ (bei normalisierten Gleitkommazahlen nach IEEE ist $b = 2$)
+        \item Exponent $e$ ($r$ Bits, $r_{\text{float}} = 8$, $r_{\text{double}} = 11$)
+    \end{itemize}
+\end{defi}
+
+\begin{algo}{Umrechnung in \emph{IEEE 754}}
+    \begin{itemize}
+        \item Umwandeln einer Dezimalzahl in eine \emph{binäre Festkommazahl} ohne Vorzeichen.
+        \item Normalisieren der \emph{Mantisse}:\\
+              Das Komma wird $n$ Stellen nach links verschoben, so dass dort nur noch eine 1 als ganzzahliger Anteil vorhanden ist. ($n$ ist bei Verschieben nach rechts negativ!)\\
+              $M$ ist dann der \emph{Nachkommateil}.
+        \item Bestimmen des \emph{Exponenten}: $E = (\text{bias } + n)_2$ (bias ist meist $127$, wenn nicht anders gegeben)
+        \item Bestimmen des \emph{Vorzeichenbits} $s$
+        \item Zusammensetzen der Gleitkommazahl
+              $$
+                  s \mid E \mid M
+              $$
+    \end{itemize}
+\end{algo}
+
+\subsection{Zeichendarstellungen}
+
+\begin{defi}{UTF-8 Codierung}
+    \begin{tabular}{| c | r | c |}
+        \hline
+        Unicode-Bereich       & \multicolumn{1}{|c|}{UTF-8-Codierung}   & Möglichkeiten        \\
+        \hline
+        0000 0000 - 0000 007F & 0xxx xxxx                               & 128 (7 Bits)         \\
+        0000 0080 - 0000 07FF & 110x xxxx 10xx xxxx                     & 2.048 (11 Bits)      \\
+        0000 0800 - 0000 FFFF & 1110 xxxx 10xx xxxx 10xx xxxx           & 65.536  (16 Bits)    \\
+        0001 0000 - 0010 FFFF & 1111 0xxx 10xx xxxx 10xx xxxx 10xx xxxx & 2.097.152  (21 Bits) \\
+        \hline
+    \end{tabular}
+\end{defi}
+
+\subsection{Spezielle Codierungen}
+
+\begin{algo}{Huffman-Codierung}
+    \begin{enumerate}
+        \item Schreibe Buchstaben mit Auftrittshäufigkeiten als \glqq Wald\grqq.
+        \item Fasse die beiden Bäume mit der geringsten Auftrittshäufigkeiten zu einem neuen Baum zusammen, dabei werden die Auftrittshäufigkeiten addiert.
+        \item Wiederhole, bis nur noch ein Baum existiert.
+        \item Codierung eines Buchstaben entspricht dann dem \emph{Pfad} zum entsprechenden Blatt mit \glqq links\grqq $\to$ 0, \glqq rechts\grqq $\to$ 1
+    \end{enumerate}
+
+    Mittlere Codelänge:
+    $$
+        L(C) = \frac{\#\text{Bits der verschlüsselten Nachricht}}{\#{\text{Zeichen der verschlüsselten Nachricht}}}
+    $$
+\end{algo}
+
+\begin{defi}{Hamming-Codierung}
+    Bei der Hamming-Codierung werden Paritätsinformationen zu Daten hinzugefügt, um so mögliche Übertragungsfehler zu erkennen.
+
+    Hamming-Codewörter haben die Länge $N = 2^k-1$, wobei $k$ Paritätsbits enthalten sind.
+    Die Bits werden der Einfachheit halber bei Eins beginnend durchnummeriert.
+    Die Paritätsbits stehen an den Stellen, deren Index eine 2er-Potenz ist.
+
+    Sind $p_1, p_2, \ldots, p_k$ Paritätsbits, $d_1, d_2, \ldots, d_{N-k}$ Bits des Datenwortes und $c_1, c_2, \ldots, c_N$ die Bits des zu bildenden Codewortes, hat ein Codewort des so konstruierten Hamming-Codes die folgende Form:
+
+    \begin{tabular}{| c | c | c || c | c | c | c || c | c | c | c | c | c | c | c || c | c | c |}
+        \hline
+        $c_1$ & $c_2$ & $c_3$ & $c_4$ & $c_5$ & $c_6$ & $c_7$ & $c_8$ & $c_9$ & $c_{10}$ & $c_{11}$ & $c_{12}$ & $c_{13}$ & $c_{14}$ & $c_{15}$ & $c_{16}$ & $c_{17}$ & \ldots \\
+        \hline
+        $p_0$ & $p_1$ & $d_1$ & $p_2$ & $d_2$ & $d_3$ & $d_4$ & $p_3$ & $d_5$ & $d_6$    & $d_7$    & $d_8$    & $d_9$    & $d_{10}$ & $d_{11}$ & $p_4$    & $d_{12}$ & \ldots \\
+        \hline
+    \end{tabular}\\
+
+    Dabei wird jedem Paritätsbit eine spezielle Bitmaske zugewiesen:
+
+    \begin{tabular}{| c || c | c | c || c | c | c | c || c | c | c | c | c | c | c | c || c |}
+        \hline
+                       & $c_1$ & $c_2$ & $c_3$ & $c_4$ & $c_5$ & $c_6$ & $c_7$ & $c_8$ & $c_9$ & $c_{10}$ & $c_{11}$ & $c_{12}$ & $c_{13}$ & $c_{14}$ & $c_{15}$ & \ldots \\
+        \hline
+        Bitmaske $p_0$ & $p_0$ & $p_1$ & 1     & $p_2$ & 1     & 0     & 1     & $p_3$ & 1     & 0        & 1        & 0        & 1        & 0        & 1        & \ldots \\
+        Bitmaske $p_1$ & $p_0$ & $p_1$ & 1     & $p_2$ & 0     & 1     & 1     & $p_3$ & 0     & 1        & 1        & 0        & 0        & 1        & 1        & \ldots \\
+        Bitmaske $p_2$ & $p_0$ & $p_1$ & 0     & $p_2$ & 1     & 1     & 1     & $p_3$ & 0     & 0        & 0        & 1        & 1        & 1        & 1        & \ldots \\
+        Bitmaske $p_3$ & $p_0$ & $p_1$ & 0     & $p_2$ & 0     & 0     & 0     & $p_3$ & 1     & 1        & 1        & 1        & 1        & 1        & 1        & \ldots \\
+        \hline
+    \end{tabular}\\
+
+    Damit gilt:
+    $$
+        \begin{aligned}
+            c_1 = p_0 & = c_3 \oplus c_5 \oplus c_7 \oplus c_9 \oplus c_{11} \oplus c_{13} \oplus c_{15} \oplus \ldots    \\
+                      & \iff \text{jedes ungerade Datenbit}                                                               \\
+            c_2 = p_1 & = c_3 \oplus c_6 \oplus c_7 \oplus c_{10} \oplus c_{11} \oplus c_{14} \oplus c_{15} \oplus \ldots \\
+                      & \iff \text{ein Datenbit rechts von $p_1$, zwei überspringen, zwei einberechnen, $\ldots$}         \\
+            c_4 = p_2 & = c_5 \oplus c_6 \oplus c_7 \oplus c_{12} \oplus c_{13} \oplus c_{14} \oplus c_{15} \oplus \ldots \\
+                      & \iff \text{drei Datenbit rechts von $p_2$, vier überspringen, vier einberechnen, $\ldots$}
+        \end{aligned}
+    $$
+\end{defi}
+
+\begin{algo}{Fehlererkennung beim Hamming-Code}
+    Situation: Empfangen eines Hamming-codierten Datensatzes
+
+    \begin{enumerate}
+        \item Erneutes Berechnen der \emph{Paritätsbits}
+        \item Erkennen, welche neu berechneten Paritätsbits $p'_i$ \emph{verschieden} sind zu den empfangenen Paritätsbits $p_i$
+        \item Bitfehler ist in dem Datenbit passiert, in dem gilt:
+              \subitem $p_i = p'_i \implies$ Bitmaske für $p_i$ ist $0$
+              \subitem $p_i \neq p'_i \implies$ Bitmaske für $p_i$ ist $1$
+    \end{enumerate}
+
+    Es wird angenommen, dass nur ein Bitfehler in den Datenbits passiert ist.
+
+    Anmerkung: Ist lediglich ein Paritätsbit verschieden, dann ist ein Übertragungsfehler in dem betreffenden Paritätsbit selbst aufgetreten, da alle Datenbits zur Berechnung von mindestens zwei Paritätsbits verwendet werden.
+\end{algo}

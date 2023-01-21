@@ -1,0 +1,134 @@
+\section{Formale Sprachen}
+\subsection{Backus-Naur-Form}
+
+\begin{defi}{(kontextfreie) Grammatik}
+    Eine (kontextfreie) Grammatik $G$ ist ein 4-Tupel $\{N, T, \Sigma, P\}$ mit folgenden Eigenschaften:
+    \begin{itemize}
+        \item $N$ ist eine endliche Menge von \emph{Nichtterminalsymbolen},
+        \item $T$ ist eine endliche Menge von \emph{Terminalsymbolen},
+        \item ein \emph{Startsymbol} $\Sigma \in N$,
+        \item eine endliche Menge an Produktionsregeln $P \subset N \times T^*$.
+    \end{itemize}
+    Es gilt $N \cap M = \emptyset$. $^*$ bezeichnet die Kleensche Hülle.
+
+    Anmerkung: Die Notation verhält sich in der Vorlesung sehr anders als in den meisten Quellen.
+\end{defi}
+
+\begin{defi}{Backus-Naur-Form}
+    In der \emph{Backus-Naur-Form} werden Symbole durch eine Zuweisung definiert.\\
+    Diese wird durch den Operator \texttt{:=} dargestellt.
+
+    \begin{itemize}
+        \item Dabei gilt weiterhin, dass in der Zuweisung eines \emph{Nichtterminalsymbols} mindestens ein weiteres Symbol auftauchen muss und
+        \item bei der Zuweisung eines \emph{Terminalsymbols} nur Zeichen des Alphabets.
+        \item Bei einer Zuweisung können mehrere Symbole oder Zeichen(-ketten) des Alphabets verbunden werden.
+        \item Durch ein Leerzeichen (\glqq ~~~\grqq, \texttt{space}) wird eine \texttt{und}-Verknüpfung definiert,
+        \item durch einen senkrechten Stricht (\glqq ~$\mid$~\grqq, \texttt{pipe}) wird eine \texttt{oder}-Zuweisung definiert.
+        \item Zur logischen Gliederung der Verknüpfungen können Klammern verwendet werden.
+        \item Es ist ebenfalls möglich Kardinalitäten für Symbole zu definieren:
+              \subitem Geschweifte Klammern \texttt{\{\}} definieren dabei eine \emph{beliebige Wiederholung} und
+              \subitem eckige Klammern \texttt{[]} definieren ein \emph{einmaliges Auftreten}.
+              \subitem In beiden Fällen ist das Weglassen des Symbols ebenfalls möglich.
+    \end{itemize}
+\end{defi}
+
+\begin{example}{Backus-Naur-Form}
+    \begin{allintypewriter}
+        \begin{tabular}{rl}
+            Satz        & := Subjekt Verb Präposition Nomen Ende                       \\
+            Subjekt     & := Nomen                                                     \\
+            Nomen       & := Artikel Substantiv                                        \\
+            Artikel     & := \ditto der\ditto | \ditto die\ditto | \ditto das\ditto    \\
+            Substantiv  & := \ditto Mann\ditto | \ditto Frau\ditto | \ditto Haus\ditto \\
+            Verb        & := \ditto geht\ditto                                         \\
+            Präposition & := \ditto in\ditto                                           \\
+            Ende        & := \ditto .\ditto
+        \end{tabular}
+    \end{allintypewriter}
+\end{example}
+
+\subsection{Programmiersprachen}
+
+\begin{defi}{Compiler}
+    Das Programm, welches den
+    menschenlesbaren \emph{Quellcode} anhand der Regeln der zugrundeliegenden Grammatik
+    interpretiert und in maschinenlesbare Anweisungen überführt, wird \emph{Compiler} genannt.
+
+    Die maschinenlesbaren Anweisungen können dabei entweder direkt in eine
+    maschinenspezifische Binärfolge umgewandelt werden, oder in einen sogenannten
+    \emph{Bytecode}.
+
+    Im zweiten Fall kann der Bytecode,
+    auch Zwischencode genannt, noch an beliebigen Prozessortypen angepasst werden,
+    muss dafür aber vor der Ausführung erneut bearbeitet werden.
+
+    Bei der Kompilierung eines Programms werden zwei Phasen durchlaufen:
+    \begin{enumerate}
+        \item \textbf{Analysephase}, in der der Quellcode analysiert und auf Fehler geprüft wird:
+              \subitem \underline{\emph{Lexer} (lexikalischer Scanner)}: \\
+              Quellcode wird in einzelne Teile (\emph{Tokens}) zerlegt und klassifiziert (z.B. als \emph{Schlüsselwörter} oder \emph{Bezeichner}).\\
+              Der Lexer erkennt hier z.B. falsch benannte Variablen.
+              \subitem \underline{\emph{Parser} (syntaktische Analyse)}: \\
+              Vom Lexer erzeugte \emph{Tokens} werden dem \emph{Parser} übergeben.
+              Der Parser überprüft den Quellcode auf Fehler und setzt ihn bei Fehlerfreiheit in einen \emph{Syntaxbaum} (AST) um.\\
+              Hier werden Fehler wie fehlende Semikolons oder falsche genutzte Operatoren erkannt.
+              \subitem \underline{\emph{Semantische Analyse}}: \\
+              Hier wird z.B. kontrolliert, ob eine verwendete Variable auch vorher deklariert wurde, oder ob Quell- und Zieltyp einer Anweisung übereinstimmen. Dabei erzeugte Metadaten werden in den AST integriert.
+              In diesem Schritt werden generell semantische Fehler erkannt, d.h. Anweisungen, die korrekt aussehen, aber fehlerhaft sind.
+              \\
+        \item \textbf{Synthesephase}, in der Binär- bzw. Bytecode erzeugt wird:
+              \subitem \underline{\emph{Zwischencodeerzeugung}}: \\
+              Hier wird plattformunabhängiger Bytecode erzeugt, der als Grundlage für den nächsten Schritt dient.
+              \subitem \underline{\emph{Optimierung}}: \\
+              Während der Optimierung wird versucht die Performanz des erzeugten Programms zu steigern.
+              \subitem \underline{\emph{Codegenerierung}}: \\
+              Hier wird aus dem optimierten Zwischencode der \emph{Binärcode} erzeugt.
+    \end{enumerate}
+\end{defi}
+
+\begin{bonus}{Ahead-of-Time Compiler}
+    Bei dieser Variante wird der gesamte Quellcode \emph{in einem Rutsch}
+    in Binär- oder Bytecode übersetzt. Das kann mitunter dazu führen, dass die Kompilierung
+    sehr lange dauert.
+\end{bonus}
+
+\begin{bonus}{Just-in-Time Compiler}
+    Daher haben sich mit der Zeit auch sogenannte \emph{Just-in-
+        Time Compiler} etablieren können, die nur einen kleinen Teil des Quellcodes direkt
+    übersetzen und weitere Teile des Quellcodes erst dann übersetzen, \emph{wenn sie bei der
+        Programmausführung benötigt werden}.
+\end{bonus}
+
+\begin{defi}{Linker}
+    Nachdem der Compiler den Binärcode erzeugt hat, muss der \emph{Linker} daraus noch
+    ein lauffähiges Programm erstellen. Das ist insbesondere der Fall, wenn es mehrere
+    Dateien mit Quellcode gibt.
+
+    Dies geschieht indem der Binärcode zu den verschiedenen
+    Quellcodedateien, der nun in sogenannten \emph{Objektdateien} vorliegt, zusammengefügt wird. Dabei werden beispielsweise symbolische Adressen aus mehreren
+    Quellcodemodulen und externen Bibliotheken so angepasst, dass sie zusammen
+    passen.
+
+    Dabei wird zwischen \emph{statischem Linken} und \emph{dynamischen Linken} unterschieden:
+
+    Beim \textbf{statischen Linken} werden alle verfügbaren Objektdateien zu \emph{einer
+        einzigen, ausführbaren Programmdatei} gelinkt.
+    \begin{itemize}
+        \item Vorteil: keine externen Abhängigkeiten, Programm auf jedem geeigneten System ohne Weiteres lauffähig
+        \item Nachteil: nicht mehr möglich, einzelne Programmteile auszutauschen ohne den Linkvorgang vollständig zu wiederholen,
+    \end{itemize}
+    Beim \textbf{dynamischen Linken} werden Funktions- und Variablenadressen erst zur Laufzeit aufgelöst, sodass externe Bibliotheken
+    einfach in Form von \emph{Dynamically Linked Libraries} (DLLs) bzw. \emph{Shared Objects} (SOs) angesprochen werden können. Da DLLs bzw. SOs als existierend
+    vorausgesetzt werden, wird das fertige Programm bei dynamischem Linken kleiner.
+    \begin{itemize}
+        \item Vorteil: mehrere Programme können dieselbe externe Bibliothek verwenden, ohne dass der benötigte Code mehrfach in einzelne Programme integriert werden muss.
+    \end{itemize}
+\end{defi}
+
+\begin{defi}{Interpreter}
+    \emph{Interpreter} zeichnen sich dadurch aus, dass der Quellcode nicht einmalig in Binärcode übersetzt wird, sondern bei jeder Programmausführung schrittweise abgearbeitet wird.
+    \begin{itemize}
+        \item Vorteile: einfache Portabilität, dynamischere Quellcodeverwaltung
+        \item Nachteile: deutlich langsamere Ausführungsgeschwindigkeit, keine Optimierungen an Programmstruktur möglich
+    \end{itemize}
+\end{defi}
