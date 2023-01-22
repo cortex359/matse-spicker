@@ -111,12 +111,12 @@
     Prozesse werden aufsteigend nach ihrer \emph{geschätzten Ausführungszeit} bearbeitet.
     \begin{itemize}
         \item Große Prozesse kommen möglicherweise nie an die Reihe, wenn stets kleinere dazukommen
-        \item Wartezeit auf das Ergebnis eines Prozesses sich in etwa proportional zur Ausführungszeit
+        \item Wartezeit auf das Ergebnis eines Prozesses verhält sich in etwa proportional zur Ausführungszeit
     \end{itemize}
 \end{algo}
 
 \begin{algo}{Scheduling: MLFQ (Multilevel Feedback Queue)}
-    Bei diesem Ansatz gibt \emph{mehrere FIFO-Queues}, denen jeweils
+    Bei diesem Ansatz gibt es \emph{mehrere FIFO-Queues}, denen jeweils
     eine \emph{Priorität} zugeordnet ist.
 
     Ein neuer Prozess wird immer in der Queue mit
