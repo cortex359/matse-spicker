@@ -1,0 +1,21 @@
+\documentclass[german]{spicker}
+
+\addbibresource{mgl.bib}
+
+\title{Mathematische Grundlagen}
+\author{Christian Rene Thelen}
+\makeindex[intoc]
+\makeindex[intoc, name=Beispiele,title=Beispiele]
+
+\begin{document}
+\maketitle
+\tableofcontents
+\newpage
+
+\include{includes/einleitung.tex}
+
+\printindex
+\printindex[Beispiele]
+
+\printbibliography
+\end{document}
