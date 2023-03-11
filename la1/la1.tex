@@ -1,17 +1,12 @@
-\documentclass[german]{../spicker}
+\documentclass[german]{spicker}
 
 \usepackage{amsmath}
 \usepackage{polynom}
 
 \title{Lineare Algebra 1}
-\author{Patrick Gustav Blaneck}
+\author{Patrick Gustav Blaneck, Christian Rene Thelen}
 \makeindex[intoc]
 \makeindex[intoc, name=Beispiele,title=Beispiele]
-
-\newcommand{\scalarprod}[1]{\left\langle #1 \right\rangle}
-\newcommand{\vektor}[1]{\begin{pmatrix*}[r] #1 \end{pmatrix*}}
-\renewcommand{\span}[1]{\operatorname{span}\left(#1\right)}
-\newcommand{\dx}{~\mathrm{d}x}
 
 \begin{document}
 \maketitle
@@ -408,7 +403,7 @@
         \item $(\R \setminus \{0\}, \cdot)$ bildet eine abelsche Gruppe.
         \item Es gelten die \emph{Distributivgesetze}
               $$
-                  \forall x, y, z \in \R : (x+y) \cdot z = (x\cdot z) + (x \cdot y) \text{ und } x \cdot (y + z) = (x \cdot y) + (x \cdot z)
+                  \forall x, y, z \in \R : (x+y) \cdot z = (x\cdot z) + (y \cdot z) \text{ und } x \cdot (y + z) = (x \cdot y) + (x \cdot z)
               $$
               \emph{Jedes} Tripel $(M, \oplus, \odot)$, das die obigen drei Bedingungen erfüllt, wird \emph{Körper} genannt.
     \end{enumerate}
