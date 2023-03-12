@@ -1,0 +1,28 @@
+\documentclass[german]{spicker}
+
+\addbibresource{java.bib}
+
+\title{Programmierung mit Java}
+\author{Christian Rene Thelen}
+\makeindex[intoc]
+\makeindex[intoc, name=Beispiele,title=Beispiele]
+
+\begin{document}
+\maketitle
+Diese Zusammenfassung basiert auf dem Java-Skript von Prof. H.J. Pflug \cite{pflug2022}.
+\tableofcontents
+\newpage
+
+\include{includes/fragen.tex}
+
+% \include{includes/exceptions.tex}
+% \include{includes/interfaces.tex}
+% \include{includes/vererbung.tex}
+% \include{includes/rekursion.tex}
+
+\printindex
+\printindex[Beispiele]
+
+\printbibliography
+
+\end{document}

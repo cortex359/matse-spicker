@@ -1,0 +1,104 @@
+Java:
+ - Java Compiler
+ - Java Laufzeitumgebung / Java Virtual Machine / Java Bytecode-Interpreter
+
+Casting
+Wrapper Classes, Autoboxing
+
+Klassen, Vererbung
+    überschreiben
+    überladen
+    abstrakte Methoden (Signatur ohne Implementierung)
+    statische Methoden
+
+\begin{defi}{}
+
+\end{defi}
+
+
+Bindungsarten
+ - Statischer und Dynamischer Typ
+
+rekursive Algorithmen
+
+checked und unchecked exceptions
+  - Checked Exceptions müssen mit try-catch gefangen werden
+  - Unchecked Exceptions können gefangen werden, müssen aber nicht
+
+Generics
+
+    public class SimpleBox<T>
+Dabei nennt man T den generischen Typ von SimpleBox. Allgemein spricht man von Typvariablen oder Generics.
+
+
+Lambdas
+
+try {
+    FileReader f = new FileReader("daten.txt");
+    kopf =  f.readline();
+} catch (IOException e) {
+    System.out.println("Error: " + e);
+}
+
+
+
+
+\section{Fragen}
+a) Das Programm, mit dem der Java-Quellcode übersetzt wird, nennt man:
+Java-Compiler
+b) Das Programm, mit dem die Java-Klassen ausgeführt werden, nennt man:
+Java Laufzeitumgebung oder Java Virtual Machine oder Java Bytecode-Interpreter
+c) Eine Ausnahme, die ein Entwickler im Code in jedem Fall behandeln muss, nennt man:
+Checked Exception
+d) Die Definition einer Methode, die in einer Oberklasse bereits definiert ist, nennt man in Java:
+überschreiben
+e) Die Definition mehrerer Methoden mit gleichem Namen und unterschiedlicher Signatur nennt man:
+überladen
+f) Eine Methode, bei der ausschließlich die Signatur definiert und keine Implementierung angegeben ist, nennt man:
+abstrakt (Ein Interface darf nur abstrakte Methoden haben, daher kann mandas Schluesselwort abstract hier auch weglassen).
+g) Eine Methode, die ohne eine Objektinstanz aufgerufen werden kann, nennt man:
+statisch
+h) Welche Art von Klasse wird im folgenden Code-Ausschnitt erzeugt?
+Funktion f = new Funktion () {
+public double getY( double x) {
+return x*x;
+}
+};
+-> anonyme innere Klasse
+i) Zu welcher Art von Klassen gehören die Klassen Integer, Float und Character?
+Wrapper-Klassen
+j) Sie wollen einen String aus vielen einzelnen Strings zusammenbauen. Welche Klasse bietet sich aus Geschwindigkeits-Gründen an?
+StringBuilder (oder StringBuffer)
+k) Die Anweisung, um eine Schleife aus dem Schleifeninneren heraus abzubrechen, heisst:
+break
+l) Die Variable Bruch b; kann nicht nur Objekte der Klasse Bruch aufnehmen. Welche Objekte kann b noch aufnehmen?
+Objekte einer Unterklasse von Bruch
+m) Welchen Konstruktor fügt Java einer Klasse automatisch zu, wenn kein Konstruktor implementiert wurde?
+Den Default-Konstruktor (oder den parameterlosen Konstruktor)
+n) Wie nennt man den Teil in spitzen Klammern im folgenden Ausdruck?
+ArrayList<String> x = new ArrayList<String>();
+-> Typparameter (Generic)
+o) Schreiben Sie den Java-Code auf, den Sie benötigen, um eine Datei daten.txt zu öffnen und die erste Zeile der Datei in den String kopf einzulesen. Berücksichtigen Sie auch Exceptions.
+
+String kopf = null;
+try {
+    Scanner sc = new Scanner(new File("daten.txt"));
+    kopf = sc.nextLine();
+} catch (FileNotFoundException e) {
+    // ...
+}
+
+p) Erläutern Sie anhand der folgenden Programmzeilen kurz die Begriffe
+(1) Interface
+(2) Anonyme innere Klasse
+ Function f = new Function () {
+ public double getY( double x) {
+ return x*x;
+ }
+ };
+
+(1) Interfaces (hier "Function"): Interfaces enthalten nur die Koepfe von
+    Methoden. Die Unterklassen muessen diese Methoden implementieren.
+(2) Anonyme innere Klassen (hier eine Unterklasse von `Function'):
+    Unterklassen ohne eigenen Namen, die in einer Methode deklariert
+    werden.
