@@ -1,8 +1,44 @@
 {
-    "discord.enabled": true,
     "latex-workshop.latex.autoBuild.run": "onSave",
-    "cSpell.words": [
-        "Highspeed",
-        "schaltungstechnische"
+    "latex-workshop.latex.texDirs": [
+        ":.:%WORKSPACE_FOLDER%/latex-libs"
+    ],
+    "latex-workshop.latex.tools": [
+        {
+            "name": "latexmk",
+            "command": "latexmk",
+            "args": [
+                "-synctex=1",
+                "-interaction=nonstopmode",
+                "-file-line-error",
+                "-pdf",
+                "-outdir=%OUTDIR%",
+                "%DOC%"
+            ],
+            "env": {
+                "TEXINPUTS": ":.:%WORKSPACE_FOLDER%/latex-libs"
+            }
+        },
+        {
+            "name": "pdflatex",
+            "command": "pdflatex",
+            "args": [
+                "-synctex=1",
+                "-interaction=nonstopmode",
+                "-file-line-error",
+                "%DOC%"
+            ],
+            "env": {
+                "TEXINPUTS": ":.:%WORKSPACE_FOLDER%/latex-libs"
+            }
+        },
+        {
+            "name": "bibtex",
+            "command": "bibtex",
+            "args": [
+                "%DOCFILE%"
+            ],
+            "env": {}
+        }
     ]
 }

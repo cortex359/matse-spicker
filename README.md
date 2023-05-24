@@ -22,3 +22,26 @@
 [![Einführung in Machine Learning](https://github.com/pblan/matse-spicker/actions/workflows/ml.yml/badge.svg)](https://github.com/pblan/matse-spicker/actions/workflows/ml.yml)
 
 [![Microcontrollertechnik](https://github.com/pblan/matse-spicker/actions/workflows/mct.yml/badge.svg)](https://github.com/pblan/matse-spicker/actions/workflows/mct.yml)
+
+
+## VS Code Setup 
+Um die Spicker einfach in Visual Studio Code mit der LaTeX Workshop Extension kompilieren zu können, kann man die Workspace Einstellung des _latexmk_ Rezeptes um die Umgebungsvariable _TEXINPUTS_ wie folgt ergänzen:
+
+```json
+    "latex-workshop.latex.tools": [
+        {
+            "name": "latexmk",
+            "command": "latexmk",
+            "args": [
+                "-synctex=1",
+                "-interaction=nonstopmode",
+                "-file-line-error",
+                "-pdf",
+                "-outdir=%OUTDIR%",
+                "%DOC%"
+            ],
+            "env": {
+                "TEXINPUTS": ":.:%WORKSPACE_FOLDER%/latex-libs"
+            }
+        },
+```
