@@ -25,7 +25,7 @@
 
 
 ## VS Code Setup 
-Um die Spicker einfach in Visual Studio Code mit der LaTeX Workshop Extension kompilieren zu können, kann man die Workspace Einstellung des _latexmk_ Rezeptes um die Umgebungsvariable _TEXINPUTS_ wie folgt ergänzen:
+Um die Spicker einfach in Visual Studio Code mit der LaTeX Workshop Extension kompilieren zu können, kann man die Workspace Einstellung des _latexmk_ Rezeptes um die Umgebungsvariable _TEXINPUTS_ wie folgt ergänzen. 
 
 ```json
     "latex-workshop.latex.tools": [
@@ -37,6 +37,7 @@ Um die Spicker einfach in Visual Studio Code mit der LaTeX Workshop Extension ko
                 "-interaction=nonstopmode",
                 "-file-line-error",
                 "-pdf",
+                "-shell-escape",
                 "-outdir=%OUTDIR%",
                 "%DOC%"
             ],
@@ -45,3 +46,5 @@ Um die Spicker einfach in Visual Studio Code mit der LaTeX Workshop Extension ko
             }
         },
 ```
+
+Die Flagge `-shell-escape` muss ebenfalls gesetzt werden, da dies für das Syntax-Highlighting mit _pygmentize_ erforderlich ist.
