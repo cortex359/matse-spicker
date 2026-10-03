@@ -1,8 +1,29 @@
 {
-    "discord.enabled": true,
     "latex-workshop.latex.autoBuild.run": "onSave",
-    "cSpell.words": [
-        "Highspeed",
-        "schaltungstechnische"
+    "latex-workshop.synctex.afterBuild.enabled": true,
+    "latex-workshop.showContextMenu": true,
+    "latex-workshop.linting.lacheck.enabled": true,
+    "latex-workshop.linting.chktex.enabled": true,
+    "latex-workshop.latex.texDirs": [
+        "/home/cthelen/Projekte/MaTSE/matse-spicker/latex-libs"
+    ],
+    "latex-workshop.latex.tools": [
+        {
+          "name": "latexmk",
+          "command": "latexmk",
+          "args": [
+            "-synctex=1",
+            "-interaction=nonstopmode",
+            "-file-line-error",
+            "-pdf",
+            "-outdir=%OUTDIR%",
+            "-shell-escape",
+            "-bibtex",
+            "%DOC%"
+          ],
+          "env": {
+            "TEXINPUTS": ".:/home/cthelen/Projekte/MaTSE/matse-spicker/latex-libs/:"
+          }
+        }
     ]
 }

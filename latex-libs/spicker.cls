@@ -26,7 +26,7 @@
 % Typesetting
 \usepackage{babel}
 \usepackage{microtype}
-\usepackage{parskip}
+%\usepackage{parskip} % not recommended with KOMA-Script class
 \usepackage{csquotes}
 \usepackage{booktabs}
 \usepackage{listings}
@@ -68,7 +68,7 @@
   \begin{btHighlight}[#1]\bgroup\aftergroup\bt@HL@endenv%
 }
 \def\bt@HL@endenv{%
-  \end{btHighlight}%   
+  \end{btHighlight}%
   \egroup
 }
 \newcommand{\bt@HL@box}[2][]{%
@@ -96,7 +96,7 @@
   morekeywords={USE, SELECT, FROM, WHERE, AS, ORDER, ASC, DESC, IS, AND, OR, LIKE, JOIN, INNER, LEFT, RIGHT, FULL, OUTER, ON, UNION, MINUS, INTERSECT, GROUP, BY, IN, HAVING, USE, SHOW, CREATE, UPDATE, ALTER, DESCRIBE, COLUMNS, SCHEMA, SCHEMAS, DATABASE, DATABASES, TABLE, TABLES, INSERT, INTO, VALUES, DROP, PRIMARY, KEY, FOREIGN, CONSTRAINT, REFERENCES, CASE, WHEN, THEN, ELSE, END, CROSS, INTERVAL, YEAR, HOUR, ADD, MODIFY, RENAME, TO, IF, EXISTS, NOT, REPLACE, VIEW, START, TRANSACTION, COMMIT, ROLLBACK, AUTOCOMMIT, FOREIGN_KEY_CHECKS, SET, TRUNCATE, LOCK, WRITE, UNLOCK, DELIMITER, PROCEDURE, BEGIN, CALL, TRIGGER, BEFORE, FOR, EACH, ROW, AFTER, TOP},
   sensitive=false,
   basicstyle=\footnotesize\ttfamily,
-  keywordstyle=\bfseries\color{codeblue},  
+  keywordstyle=\bfseries\color{codeblue},
   stringstyle=\color{codered},
   commentstyle=\color{codegrey},
   % literate=
@@ -251,7 +251,7 @@
         text-autospace,text-kashida-space,text-underline-position,top,
         unicode-bidi,-use-link-source,vertical-align,visibility,
         voice-family,volume,white-space,widows,width,word-break,
-        word-spacing,word-wrap,writing-mode,z-index,zoom},  
+        word-spacing,word-wrap,writing-mode,z-index,zoom},
   sensitive=true,
   morecomment=[l]{//},
   morecomment=[s]{/*}{*/},
@@ -264,7 +264,7 @@
 }
 % \lstdefinelanguage{HTML5}{
 %         language=html,
-%         sensitive=true, 
+%         sensitive=true,
 %         alsoletter={<>=-},
 %         otherkeywords={
 %         % HTML tags
@@ -383,7 +383,7 @@
 %         </video, <video, </video>,
 %         </wbr, <wbr, </wbr>,
 %         />, <!
-%         },  
+%         },
 %         ndkeywords={
 %         % General
 %         =,
@@ -440,7 +440,7 @@
 %         unicode-bidi:,-use-link-source:,vertical-align:,visibility:,
 %         voice-family:,volume:,white-space:,widows:,width:,word-break:,
 %         word-spacing:,word-wrap:,writing-mode:,z-index:,zoom:
-%         },  
+%         },
 %         morecomment=[s]{<!--}{-->},
 %         tag=[s],
 %         % better highlighting
@@ -454,9 +454,9 @@
 }
 
 \lstdefinestyle{MatseInputStyle}{
-    backgroundcolor=\color{backcolour}, 
+    backgroundcolor=\color{backcolour},
     basicstyle=\footnotesize\ttfamily,
-    keywordstyle=\bfseries\color{codeblue},  
+    keywordstyle=\bfseries\color{codeblue},
     stringstyle=\color{codered},
     commentstyle=\color{codegrey},
     %keywordstyle=\color{codeblue},
@@ -577,7 +577,7 @@
 \forestset{%
 empty node/.style = {
     dashed,
-    opacity = .2, 
+    opacity = .2,
     fill opacity = 0.2,
     edge = {opacity=.2},
     },
@@ -625,7 +625,7 @@ node contents={ \nodepart{one}    $#1$
 }
 
 \newcommand\mpnc[4]{\nodepart{one}      $#1$
-                    \nodepart{two}      $#2$                    
+                    \nodepart{two}      $#2$
                     \nodepart{three}    $#3$
                     \nodepart{four}     $#4$
                     }
@@ -749,7 +749,7 @@ node contents={ \nodepart{one}    $#1$
 \begin{tcolorbox}[colback=fhpurple!5!white, colframe=fhpurple!75!black, title={\sffamily SQL-Bonus: #1}]
 }{%
 \end{tcolorbox}}
-    
+
 \newcommand{\exampleseparator}{\noindent\rule{\textwidth}{0.2pt}}
 
 \newcommand*{\fullref}[1]{\hyperref[{#1}]{\ref*{#1} \nameref*{#1}}}
@@ -785,10 +785,10 @@ node contents={ \nodepart{one}    $#1$
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Citations 
+% Citations
 
 \usepackage[
-  style=numeric, 
-  backend=bibtex, 
+  style=numeric,
+  backend=bibtex,
   sorting=none
 ]{biblatex}
